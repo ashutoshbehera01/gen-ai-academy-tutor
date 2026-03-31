@@ -15,7 +15,6 @@ import google.auth
 import google.auth.transport.requests
 import google.oauth2.id_token
 
-# --- Setup Logging and Environment ---
 cloud_logging_client = google.cloud.logging.Client()
 cloud_logging_client.setup_logging()
 
@@ -23,7 +22,6 @@ load_dotenv()
 
 model_name = os.getenv("MODEL")
 
-# --- Greet user and save their prompt ---
 def add_prompt_to_state(
     tool_context: ToolContext, prompt: str
 ) -> dict[str, str]:
@@ -32,7 +30,6 @@ def add_prompt_to_state(
     logging.info(f"[State updated] Added to PROMPT: {prompt}")
     return {"status": "success"}
 
-# --- Configuring the Wikipedia tool ---
 wikipedia_tool = LangchainTool(
     tool=WikipediaQueryRun(api_wrapper=WikipediaAPIWrapper())
 )
@@ -84,8 +81,8 @@ tutor_workflow = SequentialAgent(
     name="tutor_workflow",
     description="The sequential workflow for answering a user's question about AI or tech.",
     sub_agents=[
-        comprehensive_researcher,   # Step 1: Gather all data
-        response_formatter,          # Step 2: Format the final response
+        comprehensive_researcher,   
+        response_formatter,         
     ]
 )
 
