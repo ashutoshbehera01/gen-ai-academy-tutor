@@ -1,5 +1,7 @@
 google-adk
-langchain
+langchain-core
 langchain-community
 wikipedia
 python-dotenv
+google-cloud-logging
+google-auth
